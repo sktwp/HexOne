@@ -8,14 +8,17 @@
 
 class Leg {
   public:
-  int j1, j2, j3;
+  int j1, j2, j3, num;
   Adafruit_PWMServoDriver pwm;
-  Leg(int joint1, int joint2, int joint3, Adafruit_PWMServoDriver pwm);
+  Leg(int joint1, int joint2, int joint3, Adafruit_PWMServoDriver pwm, int num);
   void normal();
   void contract();
   void pushUp();
   void raise(); 
   void extend();
   void pushOff();
+  void pivotRaiseFwd();
+  void pivotBack();
+  void bringIn();
 };
 #endif // Leg

@@ -6,18 +6,18 @@
 #include "Leg.h"
 
 
-#define legs 7
+#define legs 6
 #define LEG_INTERVAL 10
 
 class Bot {
   public:
-  Adafruit_PWMServoDriver pwm;
   Leg *l[legs];
-  Bot(Adafruit_PWMServoDriver pwm);
+  Bot(Adafruit_PWMServoDriver pwm[]);
   void normal();
   void raise();
   void pushUp();
   void contract();
+  void stepFwd();
 };
 
 #endif // Bot
