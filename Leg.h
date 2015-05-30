@@ -11,6 +11,7 @@ class Leg {
   int j1, j2, j3, num;
   Adafruit_PWMServoDriver pwm;
   Leg(int joint1, int joint2, int joint3, Adafruit_PWMServoDriver pwm, int num);
+  void generic(int j1array[], int j2array[], int j3array[], String moveName);
   void normal();
   void contract();
   void pushUp();
@@ -20,5 +21,6 @@ class Leg {
   void pivotRaiseFwd();
   void pivotBack();
   void bringIn();
+  void ortho();
 };
 #endif // Leg

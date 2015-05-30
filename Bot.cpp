@@ -12,12 +12,9 @@ Bot::Bot(Adafruit_PWMServoDriver pwm[]) {
   l[0] = new Leg(10, 11, 12, pwm[0], 0);
   
 }
-void Bot::normal() {
-  for (int i = 0; i < legs; i++) { l[i]->normal(); delay(LEG_INTERVAL); }
-}
-void Bot::contract() {
-  for (int i = 0; i < legs; i++) { l[i]->contract(); delay(LEG_INTERVAL); }
-}
+void Bot::normal() { for (int i = 0; i < legs; i++) { l[i]->normal(); delay(LEG_INTERVAL); } }
+void Bot::ortho() { for (int i = 0; i < legs; i++) { l[i]->ortho(); delay(LEG_INTERVAL); } }
+void Bot::contract() { for (int i = 0; i < legs; i++) { l[i]->contract(); delay(LEG_INTERVAL); } }
 void Bot::raise() {
   for (int i = 0; i < legs; i++) { l[i]->raise(); delay(LEG_INTERVAL); }
 }

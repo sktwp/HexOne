@@ -14,6 +14,7 @@ class Bot {
   Leg *l[legs];
   Bot(Adafruit_PWMServoDriver pwm[]);
   void normal();
+  void ortho();
   void raise();
   void pushUp();
   void contract();

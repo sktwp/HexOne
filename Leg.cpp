@@ -5,22 +5,22 @@
 #define debug 3
 
 // leg number        0   -1    2   -3   -4    5
-int j1normal[] =   {300, 300, 370, 450, 300, 300};
-int j2normal[] =   {375, 375, 375, 375, 375, 375};
-int j3normal[] =   {340, 340, 340, 340, 340, 340};
+int j1normal[] =   {300, 300, 320, 450, 300, 300};
+int j2normal[] =   {375, 375, 375, 375, 365, 280};
+int j3normal[] =   {360, 385, 340, 340, 320, 420};
 
-int j1ortho[] =    {300, 300, 370, 450, 300, 300};
-int j2ortho[] =    {320, 420, 325, 420, 420, 320};
-int j3ortho[] =    {300, 370, 280, 420, 420, 300};
+int j1ortho[] =    {300, 300, 320, 450, 300, 300};
+int j2ortho[] =    {300, 430, 300, 430, 440, 230};
+int j3ortho[] =    {300, 430, 250, 400, 370, 370};
+
+int j2contract[] = {520, 220, 520, 210, 210, 445};
+int j3contract[] = {500, 230, 480, 170, 160, 570};
+
+int j2pushUp[]   = {200, 540, 200, 540, 540, 120};
+int j3pushUp[]   = {200, 540, 170, 530, 490, 250};
 
 int j1fwd[] =      {300, 300, 400, 350, 300, 300};
 int j1back[] =     {300, 300, 270, 520, 300, 300};
-
-int j2contract[] = {520, 220, 525, 220, 220, 520};
-int j3contract[] = {500, 170, 480, 220, 220, 500};
-
-int j2pushUp[]   = {200, 540, 200, 540, 540, 200};
-int j3pushUp[]   = {170, 510, 170, 510, 510, 170};
 
 int j2raise[] =    {450, 300, 450, 300, 300, 450};
 int j3raise[] =    {300, 300, 300, 300, 300, 300};
@@ -33,30 +33,18 @@ Leg::Leg(int servo1, int servo2, int servo3, Adafruit_PWMServoDriver pwm, int nu
   this->pwm = pwm;
   this->num = num;
 }
-void Leg::normal() {
-  pwm.setPWM(j1, 0, j1normal[this->num]);
-  pwm.setPWM(j2, 0, j2normal[this->num]);
-  pwm.setPWM(j3, 0, j3normal[this->num]);
-  if (debug > 2) { String msg = "Leg " + String(this->num) + " normal"; Serial.println(msg); }
+void Leg::generic(int j1array[], int j2array[], int j3array[], String moveName) {
+  pwm.setPWM(j1, 0, j1array[this->num]);
+  pwm.setPWM(j2, 0, j2array[this->num]);
+  pwm.setPWM(j3, 0, j3array[this->num]);
+  if (debug > 2) { String msg = "Leg " + String(this->num) + " " + moveName; Serial.println(msg); }
 }
-void Leg::contract() {
-  pwm.setPWM(j1, 0, j1normal[this->num]);
-  pwm.setPWM(j2, 0, j2contract[this->num]);
-  pwm.setPWM(j3, 0, j3contract[this->num]);
-  if (debug > 2) { String msg = "Leg " + String(this->num) + " contract"; Serial.println(msg); }
-}
-void Leg::pushUp() {
-  pwm.setPWM(j1, 0, j1normal[this->num]);
-  pwm.setPWM(j2, 0, j2pushUp[this->num]);
-  pwm.setPWM(j3, 0, j3pushUp[this->num]);
-  if (debug > 2) { String msg = "Leg " + String(this->num) + " pushUp"; Serial.println(msg); }
-}
-void Leg::raise() {
-  pwm.setPWM(j1, 0, j1normal[this->num]);
-  pwm.setPWM(j2, 0, j2raise[this->num]);
-  pwm.setPWM(j3, 0, j3raise[this->num]);
-  if (debug > 2) { String msg = "Leg " + String(this->num) + " raise"; Serial.println(msg); }
-}
+void Leg::normal() { this->generic(j1normal, j2normal, j3normal, "normal"); }
+void Leg::ortho() { this->generic(j1ortho, j2ortho, j3ortho, "orto"); }
+void Leg::contract() { this->generic(j1ortho, j2contract, j3contract, "contract"); }
+void Leg::pushUp() { this->generic(j1ortho, j2pushUp, j3pushUp, "pushUp"); }
+void Leg::raise() { this->generic(j1ortho, j2raise, j3raise, "raise"); }
+
 void Leg::extend() {
   pwm.setPWM(j1, 0, j1normal[this->num]);
   pwm.setPWM(j3, 0, 300); delay(100);
