@@ -47,13 +47,16 @@ void loop() {
   
 
   //Bot test routine  
-  bot->normal(); Serial.println("normal"); delay(d);
+  //bot->normal(); Serial.println("normal"); delay(d);
   bot->ortho(); Serial.println("ortho"); delay(d);
+  bot->stepFwdOrtho(); Serial.println("stepFwdOrtho"); delay(d);
+  //bot->pivotBack(); Serial.println("pivotBack"); delay(d);
+  /*
   bot->contract(); Serial.println("contract"); delay(d);
   bot->normal(); Serial.println("normal"); delay(d);
   bot->pushUp(); Serial.println("pushUp"); delay(d);
   bot->normal(); Serial.println("normal"); delay(d);
-
+*/
 /*
   // Leg test routine
   Serial.print("Leg # ");
@@ -71,10 +74,10 @@ void loop() {
 
 */
 
-  
+ /* 
   // Joint position modeling routine
   //int joints[] = {0, 1, 2, 4, 5, 6, 10, 11, 12, 13, 14, 15, 20, 21, 22, 24, 25, 26};
-  int joints1[] = {0, 4, 10, 13, 20, 24};
+  int joints1[] = {10, 13, 24, 20, 4, 0};
   int joints2[] = {1, 5, 11, 14, 21, 25};
   int joints3[] = {2, 6, 12, 15, 22, 26};
   int leg5[] = {0, 1, 2};
@@ -83,9 +86,9 @@ void loop() {
   int leg2[] = {24, 25, 26};
   int leg1[] = {13, 14, 15};
   int leg0[] = {10, 11, 12};
-  int test[] = {24};
+  int test[] = {};
   
-  foreach (j,  test) {
+  foreach (j,  joints1) {
     Serial.print("Joint # "); Serial.println(*j);
     while (!Serial.available()) {
       delay(100);
@@ -96,7 +99,7 @@ void loop() {
     delay(500);
   }
   delay(1000);
-
+*/
   
 } //loop()
 

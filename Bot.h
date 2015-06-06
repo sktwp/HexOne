@@ -6,12 +6,12 @@
 #include "Leg.h"
 
 
-#define legs 6
+#define LEGS 6
 #define LEG_INTERVAL 10
 
 class Bot {
   public:
-  Leg *l[legs];
+  Leg *l[LEGS];
   Bot(Adafruit_PWMServoDriver pwm[]);
   void normal();
   void ortho();
@@ -19,6 +19,8 @@ class Bot {
   void pushUp();
   void contract();
   void stepFwd();
+  void stepFwdOrtho();
+  void pivotBack();
 };
 
 #endif // Bot

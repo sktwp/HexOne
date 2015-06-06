@@ -12,15 +12,11 @@ Bot::Bot(Adafruit_PWMServoDriver pwm[]) {
   l[0] = new Leg(10, 11, 12, pwm[0], 0);
   
 }
-void Bot::normal() { for (int i = 0; i < legs; i++) { l[i]->normal(); delay(LEG_INTERVAL); } }
-void Bot::ortho() { for (int i = 0; i < legs; i++) { l[i]->ortho(); delay(LEG_INTERVAL); } }
-void Bot::contract() { for (int i = 0; i < legs; i++) { l[i]->contract(); delay(LEG_INTERVAL); } }
-void Bot::raise() {
-  for (int i = 0; i < legs; i++) { l[i]->raise(); delay(LEG_INTERVAL); }
-}
-void Bot::pushUp() {
-  for (int i = 0; i < legs; i++) { l[i]->pushUp(); delay(LEG_INTERVAL); }
-}
+void Bot::normal()   { for (int i = 0; i < LEGS; i++) { l[i]->normal(); delay(LEG_INTERVAL); } }
+void Bot::ortho()    { for (int i = 0; i < LEGS; i++) { l[i]->ortho(); delay(LEG_INTERVAL); } }
+void Bot::contract() { for (int i = 0; i < LEGS; i++) { l[i]->contract(); delay(LEG_INTERVAL); } }
+void Bot::raise()    { for (int i = 0; i < LEGS; i++) { l[i]->raise(); delay(LEG_INTERVAL); } }
+void Bot::pushUp()   { for (int i = 0; i < LEGS; i++) { l[i]->pushUp(); delay(LEG_INTERVAL); } }
 void Bot::stepFwd() {
   l[0]->extend(); delay(STEP_DELAY);
   l[1]->extend(); delay(STEP_DELAY);
@@ -34,6 +30,10 @@ void Bot::stepFwd() {
   l[5]->extend();
   l[0]->contract();
   l[1]->contract();
-
 }
+void Bot::stepFwdOrtho() {
+  for (int i = 0; i < LEGS; i++) { l[i]->pivotRaiseFwd(); delay(STEP_DELAY); }
+  for (int i = LEGS-1; i >= 0; i--) { l[i]->pivotBack(); delay(LEG_INTERVAL); }
+}
+void Bot::pivotBack() { for (int i = 0; i < LEGS; i++) { l[i]->pivotBack(); delay(LEG_INTERVAL); } }
 
