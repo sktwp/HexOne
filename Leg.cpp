@@ -14,7 +14,7 @@ int j2ortho[] =    {300, 450, 300, 440, 440, 230};
 int j3ortho[] =    {300, 460, 250, 430, 370, 370};
 
 int j2contract[] = {520, 220, 520, 210, 210, 445};
-int j3contract[] = {500, 230, 480, 170, 160, 570};
+int j3contract[] = {480, 230, 480, 170, 160, 570};
 
 int j2pushUp[]   = {200, 540, 200, 540, 540, 120};
 int j3pushUp[]   = {200, 540, 170, 530, 490, 250};
@@ -24,6 +24,9 @@ int j1back[] =     {230, 350, 270, 520, 250, 350};
 
 int j2raise[] =    {375, 400, 375, 375, 365, 280};
 int j3raise[] =    {360, 400, 340, 340, 320, 420};
+
+int j2extend[] =   {370, 370, 375, 375, 365, 280};
+int j3extend[] =   {300, 420, 340, 340, 320, 420};
 
 //counting servo numbers from the body out
 Leg::Leg(int servo1, int servo2, int servo3, Adafruit_PWMServoDriver pwm, int num) {
@@ -39,18 +42,13 @@ void Leg::generic(int j1array[], int j2array[], int j3array[], String moveName) 
   pwm.setPWM(j3, 0, j3array[this->num]);
   if (debug > 2) { String msg = "Leg " + String(this->num) + " " + moveName; Serial.println(msg); }
 }
-void Leg::normal() { this->generic(j1normal, j2normal, j3normal, "normal"); }
-void Leg::ortho() { this->generic(j1ortho, j2ortho, j3ortho, "orto"); }
+void Leg::normal()   { this->generic(j1normal, j2normal, j3normal, "normal"); }
+void Leg::ortho()    { this->generic(j1ortho, j2ortho, j3ortho, "orto"); }
 void Leg::contract() { this->generic(j1ortho, j2contract, j3contract, "contract"); }
-void Leg::pushUp() { this->generic(j1ortho, j2pushUp, j3pushUp, "pushUp"); }
-void Leg::raise() { this->generic(j1ortho, j2raise, j3raise, "raise"); }
+void Leg::pushUp()   { this->generic(j1ortho, j2pushUp, j3pushUp, "pushUp"); }
+void Leg::raise()    { this->generic(j1ortho, j2raise, j3raise, "raise"); }
+void Leg::extend()   { this->generic(j1ortho, j2extend, j3extend, "extend"); }
 
-void Leg::extend() {
-  pwm.setPWM(j1, 0, j1normal[this->num]);
-  pwm.setPWM(j3, 0, 300); delay(100);
-  pwm.setPWM(j2, 0, 420);
-  if (debug > 2) { String msg = "Leg " + String(this->num) + " extend"; Serial.println(msg); }
-}
 void Leg::pushOff() {
   pwm.setPWM(j1, 0, j1normal[this->num]);
   pwm.setPWM(j3, 0, 300); delay(100);
